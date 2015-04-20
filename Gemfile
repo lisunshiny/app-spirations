@@ -49,4 +49,5 @@ group :development, :test do
 gem 'binding_of_caller'
 gem 'pry-rails'
 gem 'quiet_assets'
+gem 'bcrypt', require: true
 end
