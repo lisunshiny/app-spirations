@@ -45,7 +45,13 @@ def create_user_hank
   click_on "Create User"
 end
 
-def logout_user_bobby
+def create_bad_user
+  visit new_user_url
+  fill_in 'Password', with: "damn"
+  click_on "Create User"
+end
+
+def logout_user
   click_on "Log Out"
 end
 
@@ -63,14 +69,19 @@ def create_goal_private
   visit new_goal_url
   fill_in 'Title', with: "Eat more veggies"
   fill_in 'Content', with: "Yum Yum Yum"
-  choose('Private')
-  click_on 'Submit Goal'
+  check('Private')
+  click_on 'Create Goal'
 end
 
 def create_goal_public
   visit new_goal_url
   fill_in 'Title', with: "Eat less meat"
   fill_in 'Content', with: "Meat is Murder!!!!!"
-  choose('Public')
+  click_on 'Create Goal'
+end
+
+def create_bad_goal
+  visit new_goal_url
+  fill_in 'Content', with: "Meat is Murder!!!!!"
   click_on 'Create Goal'
 end

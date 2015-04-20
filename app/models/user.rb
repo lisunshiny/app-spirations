@@ -3,6 +3,9 @@ class User < ActiveRecord::Base
   validates :username, uniqueness: true
   validates :password, allow_nil: true, length: { minimum: 6 }
 
+
+  has_many :goals
+
   attr_reader :password
 
   after_initialize :ensure_session_token
@@ -26,11 +29,15 @@ class User < ActiveRecord::Base
     self.session_token
   end
 
+  def visible_goals
+    Goal.where("private = ? OR user_id = ?", false, self.id)
+  end
+
 
   def self.find_by_credentials(opts)
     user = User.find_by(username: opts[:username])
     if user
-      return user if user.is_password(opts[:password])
+      return user if user.is_password?(opts[:password])
     end
     nil
   end
