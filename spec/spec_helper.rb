@@ -38,6 +38,13 @@ def create_user_bobby
   click_on "Create User"
 end
 
+def create_user_hank
+  visit new_user_url
+  fill_in 'Username', with: "hank"
+  fill_in 'Password', with: "damnitbobby"
+  click_on "Create User"
+end
+
 def logout_user_bobby
   click_on "Log Out"
 end
