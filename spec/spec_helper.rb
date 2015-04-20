@@ -33,8 +33,8 @@ end
 
 def create_user_bobby
   visit new_user_url
-  fill_in 'username', with: "bobby"
-  fill_in 'password', with: "damnitbobby"
+  fill_in 'Username', with: "bobby"
+  fill_in 'Password', with: "damnitbobby"
   click_on "Create User"
 end
 
@@ -45,7 +45,25 @@ end
 
 def login_user_bobby
   visit new_session_url
-  fill_in 'username', 'bobby'
-  fill_in 'password', 'damnitbobby'
-  click_on 'Log In'
+  fill_in 'Username', with: 'bobby'
+  fill_in 'Password', with: 'damnitbobby'
+  click_on 'Sign In'
+end
+
+
+
+def create_goal_private
+  visit new_goal_url
+  fill_in 'Title', with: "Eat more veggies"
+  fill_in 'Content', with: "Yum Yum Yum"
+  choose('Private')
+  click_on 'Submit Goal'
+end
+
+def create_goal_public
+  visit new_goal_url
+  fill_in 'Title', with: "Eat less meat"
+  fill_in 'Content', with: "Meat is Murder!!!!!"
+  choose('Public')
+  click_on 'Create Goal'
 end

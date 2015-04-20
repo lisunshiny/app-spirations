@@ -23,10 +23,11 @@ class User < ActiveRecord::Base
   def reset_session_token!
     self.session_token = SecureRandom.urlsafe_base64(16)
     self.save!
+    self.session_token
   end
 
 
-  def find_by_credentials(opts)
+  def self.find_by_credentials(opts)
     user = User.find_by(username: opts[:username])
     if user
       return user if user.is_password(opts[:password])

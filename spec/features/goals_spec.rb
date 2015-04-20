@@ -2,19 +2,17 @@ require 'spec_helper'
 require 'rails_helper'
 
 
-feature "the signup process" do
+feature "creating a goal" do
 
-  it "has a new user page" do
-    visit new_user_url
+  it "has a new goal page" do
+    visit new_goal_url
+    expect(page).to have_content("New Goal")
   end
 
-  feature "signing up a user" do
-
-    it "shows username on the homepage after signup" do
+  it "shows goal on user's page after creation" do
       create_user_bobby
-
-      expect(page).to have_content "bobby"
-    end
+      create_goal
+      expect(page).to have_content
   end
 end
 
