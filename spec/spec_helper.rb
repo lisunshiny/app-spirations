@@ -85,3 +85,37 @@ def create_bad_goal
   fill_in 'Content', with: "Meat is Murder!!!!!"
   click_on 'Create Goal'
 end
+
+def create_multiple_users
+  create_user_bobby
+  logout_user
+  create_user_hank
+end
+
+def create_user_comment
+  create_multiple_users
+  visit user_url(User.first)
+  fill_in 'Comment', with: "good luck"
+  click_on 'Add Comment'
+end
+
+def create_bad_user_comment
+  create_multiple_users
+  visit user_url(User.first)
+  click_on 'Add Comment'
+end
+
+def create_goal_comment
+  create_multiple_users; create_goal_public
+  logout_user; login_user_bobby
+  visit goal_url(Goal.first)
+  fill_in 'Comment', with: "that is some hippie nonsense"
+  click_on 'Add Comment'
+end
+
+def create_bad_goal_comment
+  create_multiple_users; create_goal_public
+  logout_user; login_user_bobby
+  visit goal_url(Goal.first)
+  click_on 'Add Comment'
+end
