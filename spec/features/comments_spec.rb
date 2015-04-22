@@ -17,11 +17,10 @@ feature "make comments on goals" do
 
   scenario "cannot make comment unless logged in" do
     create_user_bobby
-    create_comment_public
+    create_goal_public
     logout_user
 
     visit goal_url(Goal.first)
-
     expect(page).to have_content("Username")
   end
 

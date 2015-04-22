@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+  before_action :require_login, only: [:show]
   def new
     @user = User.new
     render :new
@@ -17,7 +18,11 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
-    @goals = @user.goals
+    if current_user == @user
+      @goals = @user.goals
+    else
+      @goals = @user.public_goals
+    end
     render :show
   end
 

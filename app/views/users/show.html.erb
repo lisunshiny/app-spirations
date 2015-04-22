@@ -1,32 +1,4 @@
-<marquee><h1><%= @user.username %>'s Goals </h1></marquee>
+<h1><%= @user.username %>'s Goals </h1>
 
-<table>
-<% @goals.each do |goal| %>
-  <% next if goal.private == true && current_user != @user%>
-  <tr>
-    <td>
-      <%= goal.title %>  &nbsp;&nbsp;
-
-    </td>
-    <td> details:
-      <%= goal.content %>&nbsp;&nbsp;
-    </td>
-    <td>
-      status:
-      <%= goal.render_status %>
-    </td>
-    <td>
-      <%if @user == current_user && !goal.complete %>
-        <form action="<%=goal_url(goal)%>" method="post">
-          <input type="hidden" name="_method" value="patch">
-          <input type="hidden" name="authenticity_token" value="<%=form_authenticity_token%>">
-          <input type="hidden" name="goal[complete]" value="true">
-          <button>Complete</button>
-        </form>
-      <% end %>
-    </td>
-
-
-  </tr>
-<% end %>
-</table>
+<%= render "shared/goals", goals: @goals %>
+<%= render "shared/comments", commentable: @user %>

@@ -5,6 +5,11 @@ class User < ActiveRecord::Base
 
 
   has_many :goals
+  has_many :authored_comments,
+    class_name: "Comment",
+    foreign_key: :user_id
+
+
   has_many :comments, as: :commentable
 
   attr_reader :password
@@ -34,6 +39,9 @@ class User < ActiveRecord::Base
     Goal.where("private = ? OR user_id = ?", false, self.id)
   end
 
+  def public_goals
+    goals.where(private: false)
+  end
 
   def self.find_by_credentials(opts)
     user = User.find_by(username: opts[:username])

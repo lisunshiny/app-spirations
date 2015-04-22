@@ -1,10 +1,6 @@
 <h2><%= @goal.title %></h2>
+<h3>By: <%= link_to @goal.user.username, @goal.user %></h3>
 <p>Status: <%= @goal.render_status  %></p>
 <p><%= @goal.content %></p>
 
-
-<h3>Comments</h3>
-
-<% @goal.comments.each do |comment| %>
-  <p><%= comment %></p>
-<% end %>
+<%= render "shared/comments", commentable: @goal %>

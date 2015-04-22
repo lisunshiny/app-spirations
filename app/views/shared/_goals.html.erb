@@ -1,0 +1,38 @@
+<table>
+  <tr>
+    <td>Name</td>
+    <td>Details</td>
+    <td>Status</td>
+    <%= "<td>Author</td>".html_safe unless params[:controller] == "users" %>
+  </tr>
+  <% goals.each do |goal| %>
+    <tr>
+      <td>
+        <%= link_to goal.title, goal %>
+      </td>
+      <td>
+        <%= goal.content %>
+      </td>
+      <td>
+        <%= goal.render_status %>
+      </td>
+      <% unless params[:controller] == "users" %>
+        <td>
+          <%= link_to goal.user.username, goal.user %>
+        </td>
+      <% end %>
+      <td>
+        <%if goal.user == current_user && !goal.complete %>
+          <form action="<%=goal_url(goal)%>" method="post">
+            <input type="hidden" name="_method" value="patch">
+            <input type="hidden" name="authenticity_token" value="<%=form_authenticity_token%>">
+            <input type="hidden" name="goal[complete]" value="true">
+            <button>Complete</button>
+          </form>
+        <% end %>
+      </td>
+
+
+  </tr>
+<% end %>
+</table>
