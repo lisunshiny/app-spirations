@@ -29,7 +29,6 @@ class ApplicationController < ActionController::Base
     redirect_to goals_url if logged_in?
   end
 
-
   private
     def user_params
       params.require(:user).permit(:username, :password)
